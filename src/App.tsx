@@ -1,5 +1,13 @@
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+
 const App = () => {
-  return <div className='text-red-400'>Live API Playground</div>
+  return (
+    <div className='p-10'>
+      <Button>button</Button>
+      <Input placeholder='input' />
+    </div>
+  )
 }
 
 export default App
