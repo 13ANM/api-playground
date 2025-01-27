@@ -1,13 +1,9 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import Playground from '@/components/Playground/Playground'
 
-const App = () => {
-  return (
-    <div className='p-10'>
-      <Button>button</Button>
-      <Input placeholder='input' />
-    </div>
-  )
-}
+const App = () => (
+  <div className='p-10'>
+    <Playground />
+  </div>
+)
 
 export default App
