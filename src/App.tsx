@@ -1,5 +1,5 @@
 const App = () => {
-	return <>Live API Playground</>
+	return <div className='text-red-400'>Live API Playground</div>
 }
 
 export default App
