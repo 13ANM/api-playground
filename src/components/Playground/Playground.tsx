@@ -19,13 +19,7 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
-
-interface KeyValueItem {
-  id: number
-  key: string
-  value: string
-}
+import { HttpMethod, KeyValueItem } from '../../types'
 
 const Playground = () => {
   // Core request state
@@ -179,6 +173,7 @@ const Playground = () => {
         {/* Method Select */}
         <FormControl size='small' sx={{ width: 100 }}>
           <InputLabel>Method</InputLabel>
+
           <Select
             label='Method'
             value={method}
