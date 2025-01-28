@@ -45,6 +45,7 @@ const Playground = () => {
   const [body, setBody] = useState('')
 
   // Response
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [response, setResponse] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
   const [status, setStatus] = useState<number | null>(null)
@@ -77,6 +78,7 @@ const Playground = () => {
   // --- Build final URL with query params ---
   const buildUrlWithParams = () => {
     const validParams = params.filter(p => p.key && p.value)
+
     if (!validParams.length) return url
 
     const qs = validParams
@@ -84,6 +86,7 @@ const Playground = () => {
       .join('&')
 
     const sep = url.includes('?') ? '&' : '?'
+
     return `${url}${sep}${qs}`
   }
 
@@ -91,9 +94,12 @@ const Playground = () => {
   const handleSendRequest = async () => {
     if (!url) {
       setError('Please enter a URL.')
+
       setResponse(null)
+
       return
     }
+
     setError(null)
     setResponse(null)
     setStatus(null)
@@ -104,11 +110,13 @@ const Playground = () => {
 
     // Build the headers object
     const headersObj: Record<string, string> = {}
+
     headers.forEach(h => {
       if (h.key && h.value) {
         headersObj[h.key] = h.value
       }
     })
+
     if (useAuth && authToken.trim()) {
       headersObj['Authorization'] = `Bearer ${authToken}`
     }
@@ -132,6 +140,7 @@ const Playground = () => {
     }
 
     const startTime = performance.now()
+
     try {
       const res = await fetch(finalUrl, options)
       const endTime = performance.now()
@@ -146,11 +155,13 @@ const Playground = () => {
 
       // Calculate size
       let dataStr: string
+
       if (typeof data === 'object') {
         dataStr = JSON.stringify(data)
       } else {
         dataStr = data
       }
+
       setSize(new Blob([dataStr]).size)
 
       if (!res.ok) {
@@ -158,6 +169,7 @@ const Playground = () => {
       } else {
         setResponse(data)
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message)
     }
@@ -241,6 +253,7 @@ const Playground = () => {
                   </IconButton>
                 </Box>
               ))}
+
               <Button
                 size='small'
                 startIcon={<AddIcon />}
@@ -261,6 +274,7 @@ const Playground = () => {
                 />
                 <Typography>Use Bearer Token</Typography>
               </Box>
+
               {useAuth && (
                 <TextField
                   label='Token'
@@ -283,17 +297,20 @@ const Playground = () => {
                     value={h.key}
                     onChange={e => changeHeader(h.id, 'key', e.target.value)}
                   />
+
                   <TextField
                     label='Header Value'
                     size='small'
                     value={h.value}
                     onChange={e => changeHeader(h.id, 'value', e.target.value)}
                   />
+
                   <IconButton color='error' onClick={() => removeHeader(h.id)}>
                     <DeleteIcon />
                   </IconButton>
                 </Box>
               ))}
+
               <Button
                 size='small'
                 variant='outlined'
@@ -312,6 +329,7 @@ const Playground = () => {
                   Typically, GET/DELETE requests don't have a body.
                 </Typography>
               )}
+
               <TextField
                 label='JSON Body'
                 size='small'
@@ -336,9 +354,11 @@ const Playground = () => {
             <Typography>
               <strong>Status:</strong> {status !== null ? status : '--'}
             </Typography>
+
             <Typography>
               <strong>Time:</strong> {time !== null ? `${time} ms` : '--'}
             </Typography>
+
             <Typography>
               <strong>Size:</strong> {size !== null ? `${size} bytes` : '--'}
             </Typography>
