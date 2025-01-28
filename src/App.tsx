@@ -1,7 +1,7 @@
 import Playground from '@/components/Playground/Playground'
 
 const App = () => (
-  <div className='p-10'>
+  <div>
     <Playground />
   </div>
 )
